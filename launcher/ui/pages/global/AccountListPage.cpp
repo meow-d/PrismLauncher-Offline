@@ -65,7 +65,7 @@ AccountListPage::AccountListPage(QWidget *parent)
     ui->setupUi(this);
     ui->listView->setEmptyString(tr(
         "Welcome!\n"
-        "If you're new here, you can click the \"Add\" button to add your Mojang or Minecraft account."
+        "If you're new here, you can click the \"Add\" button to add an account."
     ));
     ui->listView->setEmptyMode(VersionListView::String);
     ui->listView->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -188,19 +188,6 @@ void AccountListPage::on_actionAddMicrosoft_triggered()
 
 void AccountListPage::on_actionAddOffline_triggered()
 {
-    if (!m_accounts->anyAccountIsValid()) {
-        QMessageBox::warning(
-            this,
-            tr("Error"),
-            tr(
-                "You must add a Microsoft or Mojang account that owns Minecraft before you can add an offline account."
-                "<br><br>"
-                "If you have lost your account you can contact Microsoft for support."
-            )
-        );
-        return;
-    }
-
     MinecraftAccountPtr account = OfflineLoginDialog::newAccount(
         this,
         tr("Please enter your desired username to add your offline account.")
